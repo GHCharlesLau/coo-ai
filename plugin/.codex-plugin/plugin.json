@@ -1,0 +1,17 @@
+{
+  "name": "coo-ai",
+  "version": "0.1.0",
+  "description": "Gated campaign-proposal orchestrator: intake, research, strategy, plan, measurement, draft, slides, critique, and client-ready export.",
+  "author": {
+    "name": "COO AI"
+  },
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "keywords": [
+    "campaign",
+    "marketing",
+    "public-relations",
+    "proposal",
+    "orchestrator"
+  ]
+}

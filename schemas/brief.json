@@ -1,0 +1,256 @@
+{
+  "$defs": {
+    "Audience": {
+      "properties": {
+        "primary": {
+          "title": "Primary",
+          "type": "string"
+        },
+        "secondary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Secondary"
+        },
+        "insights": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Insights",
+          "type": "array"
+        }
+      },
+      "required": [
+        "primary"
+      ],
+      "title": "Audience",
+      "type": "object"
+    },
+    "Constraint": {
+      "properties": {
+        "kind": {
+          "enum": [
+            "budget",
+            "timeline",
+            "channel",
+            "legal",
+            "brand",
+            "other"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "detail"
+      ],
+      "title": "Constraint",
+      "type": "object"
+    },
+    "Objective": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "metric": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Metric"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target"
+        },
+        "timeframe": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Timeframe"
+        }
+      },
+      "required": [
+        "id",
+        "statement"
+      ],
+      "title": "Objective",
+      "type": "object"
+    },
+    "OpenQuestion": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "question": {
+          "title": "Question",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "unanswered",
+            "answered",
+            "deferred"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "answer": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Answer"
+        },
+        "defer_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Defer Reason"
+        }
+      },
+      "required": [
+        "id",
+        "question",
+        "status"
+      ],
+      "title": "OpenQuestion",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "campaign_id": {
+      "title": "Campaign Id",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "brand": {
+      "title": "Brand",
+      "type": "string"
+    },
+    "user_demand": {
+      "title": "User Demand",
+      "type": "string"
+    },
+    "objectives": {
+      "items": {
+        "$ref": "#/$defs/Objective"
+      },
+      "title": "Objectives",
+      "type": "array"
+    },
+    "audience": {
+      "$ref": "#/$defs/Audience"
+    },
+    "offer": {
+      "title": "Offer",
+      "type": "string"
+    },
+    "success_definition": {
+      "title": "Success Definition",
+      "type": "string"
+    },
+    "constraints": {
+      "items": {
+        "$ref": "#/$defs/Constraint"
+      },
+      "title": "Constraints",
+      "type": "array"
+    },
+    "open_questions": {
+      "items": {
+        "$ref": "#/$defs/OpenQuestion"
+      },
+      "title": "Open Questions",
+      "type": "array"
+    },
+    "intake_topics": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Intake Topics",
+      "type": "object"
+    },
+    "forbidden_associations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Forbidden Associations",
+      "type": "array"
+    },
+    "forbidden_phrases": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Forbidden Phrases",
+      "type": "array"
+    },
+    "notes": {
+      "default": "",
+      "title": "Notes",
+      "type": "string"
+    }
+  },
+  "required": [
+    "campaign_id",
+    "title",
+    "brand",
+    "user_demand",
+    "objectives",
+    "audience",
+    "offer",
+    "success_definition"
+  ],
+  "title": "Brief",
+  "type": "object"
+}

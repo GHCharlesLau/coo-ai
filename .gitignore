@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+
+# Local configuration
+.env
+.env.*
+!.env.example
+
+# Campaign workspace (user data)
+store/campaigns/*
+!store/campaigns/.gitkeep
+
+# Generated agent copies and local archives
+.agents/
+.claude/
+archive/
+tmp-preview/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log

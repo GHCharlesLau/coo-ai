@@ -1,0 +1,75 @@
+{
+  "$defs": {
+    "RubricScore": {
+      "properties": {
+        "criterion": {
+          "title": "Criterion",
+          "type": "string"
+        },
+        "score": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Score",
+          "type": "integer"
+        },
+        "comment": {
+          "title": "Comment",
+          "type": "string"
+        }
+      },
+      "required": [
+        "criterion",
+        "score",
+        "comment"
+      ],
+      "title": "RubricScore",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "campaign_id": {
+      "title": "Campaign Id",
+      "type": "string"
+    },
+    "scores": {
+      "items": {
+        "$ref": "#/$defs/RubricScore"
+      },
+      "title": "Scores",
+      "type": "array"
+    },
+    "overall": {
+      "title": "Overall",
+      "type": "number"
+    },
+    "pass_threshold": {
+      "default": 3.5,
+      "title": "Pass Threshold",
+      "type": "number"
+    },
+    "passed": {
+      "title": "Passed",
+      "type": "boolean"
+    },
+    "revision_notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Revision Notes",
+      "type": "array"
+    },
+    "human_override": {
+      "default": false,
+      "title": "Human Override",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "campaign_id",
+    "scores",
+    "overall",
+    "passed"
+  ],
+  "title": "Review",
+  "type": "object"
+}

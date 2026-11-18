@@ -1,0 +1,14 @@
+{
+  "name": "coo-ai",
+  "owner": {
+    "name": "COO AI"
+  },
+  "plugins": [
+    {
+      "name": "coo-ai",
+      "source": "./plugin",
+      "description": "Gated campaign-proposal orchestrator with skills, commands, and an MCP server.",
+      "version": "0.1.0"
+    }
+  ]
+}

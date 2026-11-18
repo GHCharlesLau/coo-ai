@@ -1,0 +1,74 @@
+{
+  "$defs": {
+    "MessageHouse": {
+      "properties": {
+        "headline": {
+          "title": "Headline",
+          "type": "string"
+        },
+        "pillars": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Pillars",
+          "type": "array"
+        },
+        "proof_points": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Proof Points",
+          "type": "array"
+        }
+      },
+      "required": [
+        "headline",
+        "pillars",
+        "proof_points"
+      ],
+      "title": "MessageHouse",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Strategy must not carry a media mix, tactics, or budget.",
+  "properties": {
+    "campaign_id": {
+      "title": "Campaign Id",
+      "type": "string"
+    },
+    "insight": {
+      "title": "Insight",
+      "type": "string"
+    },
+    "positioning": {
+      "title": "Positioning",
+      "type": "string"
+    },
+    "message_house": {
+      "$ref": "#/$defs/MessageHouse"
+    },
+    "big_idea": {
+      "title": "Big Idea",
+      "type": "string"
+    },
+    "objective_links": {
+      "description": "Brief objective ids this strategy answers.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Objective Links",
+      "type": "array"
+    }
+  },
+  "required": [
+    "campaign_id",
+    "insight",
+    "positioning",
+    "message_house",
+    "big_idea",
+    "objective_links"
+  ],
+  "title": "Strategy",
+  "type": "object"
+}

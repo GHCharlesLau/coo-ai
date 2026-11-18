@@ -1,0 +1,21 @@
+{
+  "title": "Campaign proposal markdown contract",
+  "required_sections": [
+    "## 1. Executive Summary",
+    "## 2. Brief and Objectives",
+    "## 3. Situation",
+    "## 4. Strategy",
+    "## 5. Channel and Tactics Plan",
+    "## 6. Budget",
+    "## 7. Measurement",
+    "## 8. Risks and Constraints",
+    "## 9. Next Steps",
+    "## References"
+  ],
+  "markers": {
+    "budget_total": "<!-- coo:budget_total=NUMBER -->",
+    "budget_currency": "<!-- coo:budget_currency=CODE -->",
+    "kpi_ids": "<!-- coo:kpi_ids=id1,id2 -->",
+    "tactic_ids": "<!-- coo:tactic_ids=id1,id2 -->"
+  }
+}

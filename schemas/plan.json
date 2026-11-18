@@ -1,0 +1,430 @@
+{
+  "$defs": {
+    "BudgetLine": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount"
+        },
+        "low_amount": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Low Amount"
+        },
+        "high_amount": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "High Amount"
+        },
+        "estimate_status": {
+          "default": "complete",
+          "enum": [
+            "complete",
+            "assumption",
+            "partial",
+            "unpriced"
+          ],
+          "title": "Estimate Status",
+          "type": "string"
+        },
+        "components": {
+          "items": {
+            "$ref": "#/$defs/CostComponent"
+          },
+          "title": "Components",
+          "type": "array"
+        },
+        "quote_needed": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quote Needed"
+        }
+      },
+      "required": [
+        "id",
+        "label"
+      ],
+      "title": "BudgetLine",
+      "type": "object"
+    },
+    "CostComponent": {
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "quantity": {
+          "minimum": 0,
+          "title": "Quantity",
+          "type": "number"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "basis": {
+          "enum": [
+            "published_rate",
+            "benchmark",
+            "client_quote",
+            "assumption",
+            "unpriced"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "rate_currency": {
+          "default": "USD",
+          "title": "Rate Currency",
+          "type": "string"
+        },
+        "rate_low": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rate Low"
+        },
+        "rate_base": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rate Base"
+        },
+        "rate_high": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rate High"
+        },
+        "range_rationale": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Range Rationale"
+        },
+        "geography": {
+          "title": "Geography",
+          "type": "string"
+        },
+        "priced_on": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Priced On"
+        },
+        "evidence_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence Id"
+        },
+        "fx_to_budget": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fx To Budget"
+        },
+        "fx_evidence_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fx Evidence Id"
+        },
+        "fx_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fx Date"
+        },
+        "assumption_rationale": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Assumption Rationale"
+        },
+        "confidence": {
+          "anyOf": [
+            {
+              "enum": [
+                "low",
+                "medium",
+                "high"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence"
+        },
+        "quote_needed": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quote Needed"
+        }
+      },
+      "required": [
+        "label",
+        "quantity",
+        "unit",
+        "basis",
+        "geography"
+      ],
+      "title": "CostComponent",
+      "type": "object"
+    },
+    "Tactic": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "channel": {
+          "title": "Channel",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "kpi_id": {
+          "title": "Kpi Id",
+          "type": "string"
+        },
+        "budget_line_id": {
+          "title": "Budget Line Id",
+          "type": "string"
+        },
+        "owner": {
+          "title": "Owner",
+          "type": "string"
+        },
+        "start": {
+          "title": "Start",
+          "type": "string"
+        },
+        "end": {
+          "title": "End",
+          "type": "string"
+        },
+        "status": {
+          "default": "planned",
+          "enum": [
+            "planned",
+            "in_progress",
+            "completed"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "channel",
+        "description",
+        "kpi_id",
+        "budget_line_id",
+        "owner",
+        "start",
+        "end"
+      ],
+      "title": "Tactic",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "campaign_id": {
+      "title": "Campaign Id",
+      "type": "string"
+    },
+    "channels": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Channels",
+      "type": "array"
+    },
+    "tactics": {
+      "items": {
+        "$ref": "#/$defs/Tactic"
+      },
+      "title": "Tactics",
+      "type": "array"
+    },
+    "timeline_start": {
+      "title": "Timeline Start",
+      "type": "string"
+    },
+    "timeline_end": {
+      "title": "Timeline End",
+      "type": "string"
+    },
+    "budget_currency": {
+      "default": "USD",
+      "title": "Budget Currency",
+      "type": "string"
+    },
+    "budget_cap": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Budget Cap"
+    },
+    "budget_lines": {
+      "items": {
+        "$ref": "#/$defs/BudgetLine"
+      },
+      "title": "Budget Lines",
+      "type": "array"
+    },
+    "estimate_as_of": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Estimate As Of"
+    },
+    "notes": {
+      "default": "",
+      "title": "Notes",
+      "type": "string"
+    }
+  },
+  "required": [
+    "campaign_id",
+    "channels",
+    "tactics",
+    "timeline_start",
+    "timeline_end"
+  ],
+  "title": "Plan",
+  "type": "object"
+}

@@ -1,0 +1,496 @@
+{
+  "$defs": {
+    "CampaignRisk": {
+      "properties": {
+        "risk": {
+          "title": "Risk",
+          "type": "string"
+        },
+        "likelihood": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "unknown"
+          ],
+          "title": "Likelihood",
+          "type": "string"
+        },
+        "impact": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "unknown"
+          ],
+          "title": "Impact",
+          "type": "string"
+        },
+        "mitigation": {
+          "title": "Mitigation",
+          "type": "string"
+        },
+        "immediate_pr_response": {
+          "title": "Immediate Pr Response",
+          "type": "string"
+        },
+        "owner": {
+          "title": "Owner",
+          "type": "string"
+        }
+      },
+      "required": [
+        "risk",
+        "likelihood",
+        "impact",
+        "mitigation",
+        "immediate_pr_response",
+        "owner"
+      ],
+      "title": "CampaignRisk",
+      "type": "object"
+    },
+    "ComplianceCheck": {
+      "properties": {
+        "area": {
+          "enum": [
+            "local_law",
+            "data_privacy",
+            "media_consent",
+            "influencer_disclosure",
+            "claims_and_brand_safety",
+            "event_safety"
+          ],
+          "title": "Area",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "pending_review",
+            "confirmed_by_client",
+            "not_applicable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "jurisdiction": {
+          "title": "Jurisdiction",
+          "type": "string"
+        },
+        "notes": {
+          "title": "Notes",
+          "type": "string"
+        },
+        "reviewer": {
+          "default": "",
+          "title": "Reviewer",
+          "type": "string"
+        }
+      },
+      "required": [
+        "area",
+        "status",
+        "jurisdiction",
+        "notes"
+      ],
+      "title": "ComplianceCheck",
+      "type": "object"
+    },
+    "CountdownMilestone": {
+      "properties": {
+        "phase": {
+          "enum": [
+            "month_6",
+            "month_3",
+            "week_1",
+            "day_1",
+            "post_event"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "tasks": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Tasks",
+          "type": "array"
+        },
+        "owner": {
+          "title": "Owner",
+          "type": "string"
+        }
+      },
+      "required": [
+        "phase",
+        "tasks",
+        "owner"
+      ],
+      "title": "CountdownMilestone",
+      "type": "object"
+    },
+    "MediaDimension": {
+      "properties": {
+        "score": {
+          "anyOf": [
+            {
+              "maximum": 5,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Score"
+        },
+        "basis_kind": {
+          "default": "not_assessed",
+          "enum": [
+            "evidence",
+            "assumption",
+            "not_assessed"
+          ],
+          "title": "Basis Kind",
+          "type": "string"
+        },
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "confidence": {
+          "anyOf": [
+            {
+              "enum": [
+                "low",
+                "medium",
+                "high"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence"
+        }
+      },
+      "required": [
+        "basis"
+      ],
+      "title": "MediaDimension",
+      "type": "object"
+    },
+    "MediaProfile": {
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "media_outlet",
+            "journalist",
+            "kol"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "tier": {
+          "title": "Tier",
+          "type": "string"
+        },
+        "tier_category": {
+          "default": "unclassified",
+          "enum": [
+            "tier_1_mainstream",
+            "tier_2_vertical",
+            "tier_3_niche",
+            "unclassified"
+          ],
+          "title": "Tier Category",
+          "type": "string"
+        },
+        "tier_rationale": {
+          "default": "",
+          "title": "Tier Rationale",
+          "type": "string"
+        },
+        "audience": {
+          "title": "Audience",
+          "type": "string"
+        },
+        "relevance": {
+          "$ref": "#/$defs/MediaDimension"
+        },
+        "reach": {
+          "$ref": "#/$defs/MediaDimension"
+        },
+        "resonance": {
+          "$ref": "#/$defs/MediaDimension"
+        },
+        "risk_ethics": {
+          "$ref": "#/$defs/MediaDimension"
+        },
+        "disclosure_required": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Disclosure Required"
+        },
+        "disclosure_notes": {
+          "default": "",
+          "title": "Disclosure Notes",
+          "type": "string"
+        },
+        "selection_rationale": {
+          "title": "Selection Rationale",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "kind",
+        "tier",
+        "audience",
+        "relevance",
+        "reach",
+        "resonance",
+        "risk_ethics",
+        "selection_rationale"
+      ],
+      "title": "MediaProfile",
+      "type": "object"
+    },
+    "RopesPlan": {
+      "properties": {
+        "research": {
+          "title": "Research",
+          "type": "string"
+        },
+        "stakeholder_analysis": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Stakeholder Analysis",
+          "type": "array"
+        },
+        "objectives": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Objectives",
+          "type": "array"
+        },
+        "impact_objectives": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Impact Objectives",
+          "type": "array"
+        },
+        "output_objectives": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Output Objectives",
+          "type": "array"
+        },
+        "outcome_objectives": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Outcome Objectives",
+          "type": "array"
+        },
+        "programming": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Programming",
+          "type": "array"
+        },
+        "programming_theme": {
+          "default": "",
+          "title": "Programming Theme",
+          "type": "string"
+        },
+        "message_strategy": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Message Strategy",
+          "type": "array"
+        },
+        "pretesting": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Pretesting",
+          "type": "array"
+        },
+        "monitoring": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Monitoring",
+          "type": "array"
+        },
+        "evaluation": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evaluation",
+          "type": "array"
+        },
+        "stewardship": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Stewardship",
+          "type": "array"
+        }
+      },
+      "required": [
+        "research",
+        "objectives",
+        "programming",
+        "evaluation",
+        "stewardship"
+      ],
+      "title": "RopesPlan",
+      "type": "object"
+    },
+    "RunOfShowItem": {
+      "properties": {
+        "time": {
+          "title": "Time",
+          "type": "string"
+        },
+        "duration": {
+          "title": "Duration",
+          "type": "string"
+        },
+        "activity": {
+          "title": "Activity",
+          "type": "string"
+        },
+        "on_stage_talent": {
+          "title": "On Stage Talent",
+          "type": "string"
+        },
+        "av_cues": {
+          "title": "Av Cues",
+          "type": "string"
+        },
+        "responsible_party": {
+          "title": "Responsible Party",
+          "type": "string"
+        }
+      },
+      "required": [
+        "time",
+        "duration",
+        "activity",
+        "on_stage_talent",
+        "av_cues",
+        "responsible_party"
+      ],
+      "title": "RunOfShowItem",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "campaign_id": {
+      "title": "Campaign Id",
+      "type": "string"
+    },
+    "ropes": {
+      "$ref": "#/$defs/RopesPlan"
+    },
+    "media_klos": {
+      "items": {
+        "$ref": "#/$defs/MediaProfile"
+      },
+      "title": "Media Klos",
+      "type": "array"
+    },
+    "media_coverage_note": {
+      "title": "Media Coverage Note",
+      "type": "string"
+    },
+    "media_coverage_status": {
+      "default": "pending_research",
+      "enum": [
+        "assessed",
+        "pending_client_list",
+        "pending_research",
+        "not_applicable"
+      ],
+      "title": "Media Coverage Status",
+      "type": "string"
+    },
+    "countdown": {
+      "items": {
+        "$ref": "#/$defs/CountdownMilestone"
+      },
+      "title": "Countdown",
+      "type": "array"
+    },
+    "run_of_show": {
+      "items": {
+        "$ref": "#/$defs/RunOfShowItem"
+      },
+      "title": "Run Of Show",
+      "type": "array"
+    },
+    "run_of_show_note": {
+      "default": "",
+      "title": "Run Of Show Note",
+      "type": "string"
+    },
+    "risks": {
+      "items": {
+        "$ref": "#/$defs/CampaignRisk"
+      },
+      "minItems": 1,
+      "title": "Risks",
+      "type": "array"
+    },
+    "compliance": {
+      "items": {
+        "$ref": "#/$defs/ComplianceCheck"
+      },
+      "title": "Compliance",
+      "type": "array"
+    }
+  },
+  "required": [
+    "campaign_id",
+    "ropes",
+    "media_coverage_note",
+    "risks"
+  ],
+  "title": "OperationsPlan",
+  "type": "object"
+}

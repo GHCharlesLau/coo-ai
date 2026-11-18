@@ -1,0 +1,193 @@
+{
+  "$defs": {
+    "StageState": {
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "status": {
+          "default": "pending",
+          "enum": [
+            "pending",
+            "running",
+            "passed",
+            "failed",
+            "needs_human",
+            "needs_agent",
+            "escalated"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "attempts": {
+          "default": 0,
+          "title": "Attempts",
+          "type": "integer"
+        },
+        "gate_passed": {
+          "default": false,
+          "title": "Gate Passed",
+          "type": "boolean"
+        },
+        "last_errors": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Last Errors",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "StageState",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "revision_of": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Revision Of"
+    },
+    "quality_profile": {
+      "default": "legacy",
+      "enum": [
+        "legacy",
+        "evidence_v2"
+      ],
+      "title": "Quality Profile",
+      "type": "string"
+    },
+    "pipeline_version": {
+      "default": "legacy",
+      "enum": [
+        "legacy",
+        "lean"
+      ],
+      "title": "Pipeline Version",
+      "type": "string"
+    },
+    "requirements_version": {
+      "default": 2,
+      "description": "Gate set version; older records default to 2 and new runs are created at 3.",
+      "minimum": 1,
+      "title": "Requirements Version",
+      "type": "integer"
+    },
+    "created_at": {
+      "title": "Created At",
+      "type": "string"
+    },
+    "updated_at": {
+      "title": "Updated At",
+      "type": "string"
+    },
+    "status": {
+      "default": "ready",
+      "enum": [
+        "ready",
+        "running",
+        "awaiting_human",
+        "awaiting_agent",
+        "escalated",
+        "failed",
+        "complete"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "current_stage": {
+      "default": "intake",
+      "title": "Current Stage",
+      "type": "string"
+    },
+    "stages": {
+      "additionalProperties": {
+        "$ref": "#/$defs/StageState"
+      },
+      "title": "Stages",
+      "type": "object"
+    },
+    "approvals": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Approvals",
+      "type": "array"
+    },
+    "model": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model"
+    },
+    "stub": {
+      "default": false,
+      "title": "Stub",
+      "type": "boolean"
+    },
+    "pause_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pause Reason"
+    },
+    "proposal_hash_at_write": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Proposal Hash At Write"
+    },
+    "slides_hash_at_slides": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Slides Hash At Slides"
+    }
+  },
+  "required": [
+    "id",
+    "created_at",
+    "updated_at",
+    "stages"
+  ],
+  "title": "CampaignMeta",
+  "type": "object"
+}

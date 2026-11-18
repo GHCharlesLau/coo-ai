@@ -1,0 +1,822 @@
+{
+  "$defs": {
+    "ChartSeries": {
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "values": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Values",
+          "type": "array"
+        }
+      },
+      "required": [
+        "label",
+        "values"
+      ],
+      "title": "ChartSeries",
+      "type": "object"
+    },
+    "ChartSpec": {
+      "properties": {
+        "kind": {
+          "enum": [
+            "bar",
+            "line",
+            "donut",
+            "horizontal_bar",
+            "stacked_bar"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "categories": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Categories",
+          "type": "array"
+        },
+        "series": {
+          "items": {
+            "$ref": "#/$defs/ChartSeries"
+          },
+          "minItems": 1,
+          "title": "Series",
+          "type": "array"
+        },
+        "unit": {
+          "default": "",
+          "title": "Unit",
+          "type": "string"
+        },
+        "axis_label": {
+          "default": "",
+          "title": "Axis Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "categories",
+        "series"
+      ],
+      "title": "ChartSpec",
+      "type": "object"
+    },
+    "DesignSpec": {
+      "properties": {
+        "density": {
+          "default": "balanced",
+          "enum": [
+            "airy",
+            "balanced",
+            "dense"
+          ],
+          "title": "Density",
+          "type": "string"
+        },
+        "visual_ratio": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Visual Ratio",
+          "type": "number"
+        },
+        "reference_style": {
+          "default": "",
+          "title": "Reference Style",
+          "type": "string"
+        },
+        "style": {
+          "default": "editorial",
+          "enum": [
+            "editorial",
+            "brief",
+            "report"
+          ],
+          "title": "Style",
+          "type": "string"
+        },
+        "accent_mode": {
+          "default": "contrast",
+          "enum": [
+            "contrast",
+            "warm",
+            "mono"
+          ],
+          "title": "Accent Mode",
+          "type": "string"
+        },
+        "variant": {
+          "default": "auto",
+          "title": "Variant",
+          "type": "string"
+        }
+      },
+      "title": "DesignSpec",
+      "type": "object"
+    },
+    "DiagramEdge": {
+      "properties": {
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        },
+        "label": {
+          "default": "",
+          "title": "Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "target"
+      ],
+      "title": "DiagramEdge",
+      "type": "object"
+    },
+    "DiagramNode": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "detail": {
+          "default": "",
+          "title": "Detail",
+          "type": "string"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Date"
+        }
+      },
+      "required": [
+        "id",
+        "label"
+      ],
+      "title": "DiagramNode",
+      "type": "object"
+    },
+    "DiagramSpec": {
+      "properties": {
+        "kind": {
+          "enum": [
+            "flow",
+            "framework",
+            "timeline"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "nodes": {
+          "items": {
+            "$ref": "#/$defs/DiagramNode"
+          },
+          "minItems": 2,
+          "title": "Nodes",
+          "type": "array"
+        },
+        "edges": {
+          "items": {
+            "$ref": "#/$defs/DiagramEdge"
+          },
+          "title": "Edges",
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "nodes"
+      ],
+      "title": "DiagramSpec",
+      "type": "object"
+    },
+    "ImageSpec": {
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "alt_text": {
+          "title": "Alt Text",
+          "type": "string"
+        },
+        "caption": {
+          "default": "",
+          "title": "Caption",
+          "type": "string"
+        },
+        "rights_status": {
+          "enum": [
+            "supplied",
+            "licensed"
+          ],
+          "title": "Rights Status",
+          "type": "string"
+        },
+        "usage": {
+          "title": "Usage",
+          "type": "string"
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Url"
+        },
+        "creator": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Creator"
+        },
+        "license": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "License"
+        },
+        "placement": {
+          "default": "right",
+          "enum": [
+            "right",
+            "left",
+            "full_bleed",
+            "inset"
+          ],
+          "title": "Placement",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "alt_text",
+        "rights_status",
+        "usage"
+      ],
+      "title": "ImageSpec",
+      "type": "object"
+    },
+    "MatrixCellSpec": {
+      "properties": {
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "detail": {
+          "default": "",
+          "title": "Detail",
+          "type": "string"
+        },
+        "tone": {
+          "default": "medium",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "title": "Tone",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title"
+      ],
+      "title": "MatrixCellSpec",
+      "type": "object"
+    },
+    "MatrixSpec": {
+      "properties": {
+        "x_label": {
+          "default": "Likelihood",
+          "title": "X Label",
+          "type": "string"
+        },
+        "y_label": {
+          "default": "Impact",
+          "title": "Y Label",
+          "type": "string"
+        },
+        "cells": {
+          "items": {
+            "$ref": "#/$defs/MatrixCellSpec"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Cells",
+          "type": "array"
+        }
+      },
+      "required": [
+        "cells"
+      ],
+      "title": "MatrixSpec",
+      "type": "object"
+    },
+    "SlideSpec": {
+      "properties": {
+        "layout": {
+          "enum": [
+            "title",
+            "section",
+            "bullets",
+            "two_column",
+            "kpis",
+            "budget",
+            "quote",
+            "references",
+            "next_steps",
+            "diagram",
+            "timeline",
+            "chart",
+            "photo",
+            "table",
+            "stats",
+            "gallery",
+            "comparison",
+            "map",
+            "matrix"
+          ],
+          "title": "Layout",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "subtitle": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Subtitle"
+        },
+        "body": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Body"
+        },
+        "bullets": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Bullets",
+          "type": "array"
+        },
+        "left": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Left",
+          "type": "array"
+        },
+        "right": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Right",
+          "type": "array"
+        },
+        "left_title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Left Title"
+        },
+        "right_title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Right Title"
+        },
+        "notes": {
+          "default": "",
+          "title": "Notes",
+          "type": "string"
+        },
+        "cite_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Cite Ids",
+          "type": "array"
+        },
+        "rows": {
+          "items": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "title": "Rows",
+          "type": "array"
+        },
+        "quote": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quote"
+        },
+        "attribution": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Attribution"
+        },
+        "diagram": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DiagramSpec"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "chart": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ChartSpec"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "image": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ImageSpec"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "table": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TableSpec"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "stats": {
+          "items": {
+            "$ref": "#/$defs/StatSpec"
+          },
+          "maxItems": 4,
+          "title": "Stats",
+          "type": "array"
+        },
+        "images": {
+          "items": {
+            "$ref": "#/$defs/ImageSpec"
+          },
+          "maxItems": 4,
+          "title": "Images",
+          "type": "array"
+        },
+        "matrix": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MatrixSpec"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "source_note": {
+          "default": "",
+          "title": "Source Note",
+          "type": "string"
+        },
+        "variant": {
+          "default": "auto",
+          "title": "Variant",
+          "type": "string"
+        }
+      },
+      "required": [
+        "layout",
+        "title"
+      ],
+      "title": "SlideSpec",
+      "type": "object"
+    },
+    "StatSpec": {
+      "properties": {
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "detail": {
+          "default": "",
+          "title": "Detail",
+          "type": "string"
+        },
+        "source_note": {
+          "default": "",
+          "title": "Source Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "label"
+      ],
+      "title": "StatSpec",
+      "type": "object"
+    },
+    "TableSpec": {
+      "properties": {
+        "columns": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Columns",
+          "type": "array"
+        },
+        "rows": {
+          "items": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "minItems": 1,
+          "title": "Rows",
+          "type": "array"
+        },
+        "align": {
+          "items": {
+            "enum": [
+              "left",
+              "center",
+              "right"
+            ],
+            "type": "string"
+          },
+          "title": "Align",
+          "type": "array"
+        },
+        "highlight_rows": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Highlight Rows",
+          "type": "array"
+        },
+        "column_widths": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Column Widths",
+          "type": "array"
+        },
+        "source_note": {
+          "default": "",
+          "title": "Source Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "columns",
+        "rows"
+      ],
+      "title": "TableSpec",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "campaign_id": {
+      "title": "Campaign Id",
+      "type": "string"
+    },
+    "theme": {
+      "default": "editorial",
+      "enum": [
+        "editorial",
+        "navy_gold"
+      ],
+      "title": "Theme",
+      "type": "string"
+    },
+    "budget_total": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Budget Total"
+    },
+    "budget_low": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Budget Low"
+    },
+    "budget_high": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Budget High"
+    },
+    "budget_complete": {
+      "default": true,
+      "title": "Budget Complete",
+      "type": "boolean"
+    },
+    "budget_currency": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Budget Currency"
+    },
+    "kpi_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Kpi Ids",
+      "type": "array"
+    },
+    "tactic_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tactic Ids",
+      "type": "array"
+    },
+    "slides": {
+      "items": {
+        "$ref": "#/$defs/SlideSpec"
+      },
+      "title": "Slides",
+      "type": "array"
+    },
+    "template_path": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Template Path"
+    },
+    "palette": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Palette",
+      "type": "object"
+    },
+    "font_heading": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Font Heading"
+    },
+    "font_body": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Font Body"
+    },
+    "design": {
+      "$ref": "#/$defs/DesignSpec"
+    }
+  },
+  "required": [
+    "campaign_id",
+    "slides"
+  ],
+  "title": "Deck",
+  "type": "object"
+}

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "coo": {
+      "command": "python",
+      "args": ["-m", "coo", "mcp"]
+    }
+  }
+}

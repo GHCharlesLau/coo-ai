@@ -1,0 +1,335 @@
+{
+  "$defs": {
+    "BudgetLedgerEntry": {
+      "properties": {
+        "budget_line_id": {
+          "title": "Budget Line Id",
+          "type": "string"
+        },
+        "category": {
+          "title": "Category",
+          "type": "string"
+        },
+        "estimate_low": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Estimate Low"
+        },
+        "estimate_base": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Estimate Base"
+        },
+        "estimate_high": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Estimate High"
+        },
+        "actual": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Actual"
+        },
+        "currency": {
+          "title": "Currency",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "estimated",
+            "quoted",
+            "committed",
+            "actual",
+            "unpriced"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "budget_line_id",
+        "category",
+        "currency",
+        "status"
+      ],
+      "title": "BudgetLedgerEntry",
+      "type": "object"
+    },
+    "EvaluationOutline": {
+      "properties": {
+        "objective_id": {
+          "title": "Objective Id",
+          "type": "string"
+        },
+        "kpi_id": {
+          "title": "Kpi Id",
+          "type": "string"
+        },
+        "evaluation_method": {
+          "title": "Evaluation Method",
+          "type": "string"
+        },
+        "data_source": {
+          "title": "Data Source",
+          "type": "string"
+        },
+        "timing": {
+          "title": "Timing",
+          "type": "string"
+        }
+      },
+      "required": [
+        "objective_id",
+        "kpi_id",
+        "evaluation_method",
+        "data_source",
+        "timing"
+      ],
+      "title": "EvaluationOutline",
+      "type": "object"
+    },
+    "FAQItem": {
+      "properties": {
+        "question": {
+          "title": "Question",
+          "type": "string"
+        },
+        "answer": {
+          "title": "Answer",
+          "type": "string"
+        },
+        "approval_status": {
+          "default": "draft",
+          "enum": [
+            "draft",
+            "needs_client_review",
+            "approved"
+          ],
+          "title": "Approval Status",
+          "type": "string"
+        },
+        "approved_by": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Approved By"
+        }
+      },
+      "required": [
+        "question",
+        "answer"
+      ],
+      "title": "FAQItem",
+      "type": "object"
+    },
+    "PitchEmail": {
+      "properties": {
+        "subject": {
+          "title": "Subject",
+          "type": "string"
+        },
+        "recipient_personalization": {
+          "title": "Recipient Personalization",
+          "type": "string"
+        },
+        "hook": {
+          "title": "Hook",
+          "type": "string"
+        },
+        "body": {
+          "title": "Body",
+          "type": "string"
+        },
+        "call_to_action": {
+          "title": "Call To Action",
+          "type": "string"
+        }
+      },
+      "required": [
+        "subject",
+        "recipient_personalization",
+        "hook",
+        "body",
+        "call_to_action"
+      ],
+      "title": "PitchEmail",
+      "type": "object"
+    },
+    "PressRelease": {
+      "properties": {
+        "headline": {
+          "title": "Headline",
+          "type": "string"
+        },
+        "subheadline": {
+          "default": "",
+          "title": "Subheadline",
+          "type": "string"
+        },
+        "dateline": {
+          "title": "Dateline",
+          "type": "string"
+        },
+        "body": {
+          "title": "Body",
+          "type": "string"
+        },
+        "quote": {
+          "title": "Quote",
+          "type": "string"
+        },
+        "quote_attribution": {
+          "title": "Quote Attribution",
+          "type": "string"
+        },
+        "boilerplate": {
+          "title": "Boilerplate",
+          "type": "string"
+        },
+        "approval_note": {
+          "default": "",
+          "title": "Approval Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "headline",
+        "dateline",
+        "body",
+        "quote",
+        "quote_attribution",
+        "boilerplate"
+      ],
+      "title": "PressRelease",
+      "type": "object"
+    },
+    "SocialPost": {
+      "properties": {
+        "date_or_phase": {
+          "title": "Date Or Phase",
+          "type": "string"
+        },
+        "platform": {
+          "title": "Platform",
+          "type": "string"
+        },
+        "copy": {
+          "title": "Copy",
+          "type": "string"
+        },
+        "visual_cue": {
+          "title": "Visual Cue",
+          "type": "string"
+        },
+        "hashtags": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Hashtags",
+          "type": "array"
+        }
+      },
+      "required": [
+        "date_or_phase",
+        "platform",
+        "copy",
+        "visual_cue"
+      ],
+      "title": "SocialPost",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "campaign_id": {
+      "title": "Campaign Id",
+      "type": "string"
+    },
+    "media_pitch": {
+      "$ref": "#/$defs/PitchEmail"
+    },
+    "press_release": {
+      "$ref": "#/$defs/PressRelease"
+    },
+    "issue_faq": {
+      "items": {
+        "$ref": "#/$defs/FAQItem"
+      },
+      "minItems": 1,
+      "title": "Issue Faq",
+      "type": "array"
+    },
+    "social_calendar": {
+      "items": {
+        "$ref": "#/$defs/SocialPost"
+      },
+      "minItems": 1,
+      "title": "Social Calendar",
+      "type": "array"
+    },
+    "budget_ledger": {
+      "items": {
+        "$ref": "#/$defs/BudgetLedgerEntry"
+      },
+      "minItems": 1,
+      "title": "Budget Ledger",
+      "type": "array"
+    },
+    "post_campaign_evaluation": {
+      "items": {
+        "$ref": "#/$defs/EvaluationOutline"
+      },
+      "minItems": 1,
+      "title": "Post Campaign Evaluation",
+      "type": "array"
+    }
+  },
+  "required": [
+    "campaign_id",
+    "media_pitch",
+    "press_release",
+    "issue_faq",
+    "social_calendar",
+    "budget_ledger",
+    "post_campaign_evaluation"
+  ],
+  "title": "CampaignAssets",
+  "type": "object"
+}

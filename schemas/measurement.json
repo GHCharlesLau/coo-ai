@@ -1,0 +1,168 @@
+{
+  "$defs": {
+    "KPI": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "definition": {
+          "title": "Definition",
+          "type": "string"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        },
+        "polarity": {
+          "enum": [
+            "leading",
+            "lagging"
+          ],
+          "title": "Polarity",
+          "type": "string"
+        },
+        "data_source": {
+          "title": "Data Source",
+          "type": "string"
+        },
+        "cadence": {
+          "title": "Cadence",
+          "type": "string"
+        },
+        "formula": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Formula"
+        },
+        "measurable": {
+          "default": true,
+          "title": "Measurable",
+          "type": "boolean"
+        },
+        "target_status": {
+          "default": "established",
+          "enum": [
+            "established",
+            "provisional"
+          ],
+          "title": "Target Status",
+          "type": "string"
+        },
+        "communication_tier": {
+          "anyOf": [
+            {
+              "enum": [
+                "output",
+                "outtake",
+                "outcome"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Communication Tier"
+        },
+        "objective_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Objective Ids",
+          "type": "array"
+        },
+        "target_evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Target Evidence Ids",
+          "type": "array"
+        },
+        "baseline": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Baseline"
+        },
+        "calibration_method": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Calibration Method"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "definition",
+        "unit",
+        "target",
+        "polarity",
+        "data_source",
+        "cadence"
+      ],
+      "title": "KPI",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "campaign_id": {
+      "title": "Campaign Id",
+      "type": "string"
+    },
+    "kpis": {
+      "items": {
+        "$ref": "#/$defs/KPI"
+      },
+      "title": "Kpis",
+      "type": "array"
+    },
+    "reporting_cadence": {
+      "title": "Reporting Cadence",
+      "type": "string"
+    },
+    "decision_rules": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Decision Rules",
+      "type": "array"
+    }
+  },
+  "required": [
+    "campaign_id",
+    "kpis",
+    "reporting_cadence"
+  ],
+  "title": "Measurement",
+  "type": "object"
+}
