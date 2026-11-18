@@ -37,6 +37,36 @@ python -m coo resume <campaign-id> --approve
 
 Chat is not a brief, and hand-written proposal files are not a campaign: the CLI reads `artifacts/` from disk and gates the result.
 
+## For coding agents
+
+If you are an AI agent asked for a campaign proposal, use the COO AI plugin. Do not draft the proposal in chat or bypass the CLI. Load the `coo-ai` skill (or run `/coo`; Claude Code: `/coo-ai:coo`), then follow the CLI loop:
+
+```bash
+python -m coo new --demand "<the user's request>" --run
+python -m coo status <campaign-id>
+python -m coo prompt <campaign-id>
+# write only the files named in the prompt under artifacts/
+python -m coo resume <campaign-id>
+```
+
+In an MCP host, the same loop is `coo_new` → `coo_prompt` → `coo_artifact_write` → `coo_resume` → `coo_export`.
+
+1. **At `awaiting_agent`** — read the prompt and write its named files into `artifacts/`. Use your own model; no API key is needed. Do not write files the prompt does not name.
+2. **If a gate fails** — the prompt is rewritten with `## Previous gate errors`. Re-read it, fix the named files, then `resume`.
+3. **At `awaiting_human`** — show the pending artifact to the user and stop. Call `resume --approve` only after they agree.
+4. **At `complete`** — export every deliverable:
+
+```bash
+python -m coo export <campaign-id> --format all
+```
+
+Rules:
+
+- Never invent sources, quotes, or approvals. Put evidence in `evidence.json`; mark budget figures as assumptions or ranges.
+- Deliverables are generated. Edit `proposal.md` or `slides.json` and re-export; never hand-edit DOCX, PDF, HTML, or PPTX.
+- `--stub` is a test fixture. Never use it for a real demand.
+- Without filesystem access, use `coo_artifact_read` / `coo_artifact_write` and the other MCP tools.
+
 ## Pipeline
 
 | Stage | Writes |
